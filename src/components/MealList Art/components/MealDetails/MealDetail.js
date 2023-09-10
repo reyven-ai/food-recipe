@@ -1,0 +1,3 @@
+function MealDetail() {
+  return <>Hello</>;
+}
