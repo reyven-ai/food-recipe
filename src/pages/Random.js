@@ -12,6 +12,9 @@ const StyledContainer = styled.div`
 const StyledHeading = styled.h1`
   font-size: 24px;
   color: #333;
+
+  @media (max-width: 576px) {
+    font-size: 18px;
 `;
 
 const StyledImage = styled.img`
@@ -20,11 +23,15 @@ const StyledImage = styled.img`
   border-radius: 10px;
   margin-top: 10px;
   object-fit: cover;
+  height: auto;
 `;
 
 const StyledMealName = styled.h2`
   font-size: 18px;
-  color: #555;
+  color: black;
+
+  @media (max-width: 576px) {
+    font-size: 14px;
 `;
 
 function RandomMeal() {

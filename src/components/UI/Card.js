@@ -1,12 +1,18 @@
 import React from "react";
 
-import classes from "./Card.module.css";
+import styled from "styled-components";
+
+const CousineContainer = styled.div`
+  display: block;
+  width: 90%;
+  justify-content: center;
+  margin: auto;
+  gap: 30px;
+`;
 
 const Card = (props) => {
   return (
-    <div className={classes.card} style={props.style}>
-      {props.children}
-    </div>
+    <CousineContainer style={props.style}>{props.children}</CousineContainer>
   );
 };
 

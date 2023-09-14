@@ -1,21 +1,17 @@
-//
 import { RouterProvider, createBrowserRouter, Route } from "react-router-dom";
-import React from "react";
+// import React from "react";
 import HomePage from "./pages/Home";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
-import Cousine from "./components/Cousine";
+import Cousine from "./pages/Cousine";
 import RandomPage from "./pages/Random";
 import BrowseByArea from "./pages/BrowseByArea";
 import FavoritesPage from "./pages/Favorites";
-import CategoryList from "./components/CousineList";
+import MealDetailPage from "./components/Meal/MealDetail";
+import { addToFavorites } from "./store/actions/meal";
 import SearchResults from "./pages/SearchResult";
-//
-// imp
-// import CategoryMeals from "./pages/CategoryList";
-// import Favorites from "./components/FoodList/Favorites";
-// import Cousine from "./pages/Cousine";
-// import BrowseByCountry from "./pages/BrowseByCountry";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const routes = [
   {
@@ -23,20 +19,14 @@ const routes = [
     element: <RootLayout />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "/cousine", exact: true, element: <Cousine /> },
-      { path: "/cousine/:category", element: <Cousine /> },
+      { path: "/cuisine", exact: true, element: <Cousine /> },
+      { path: "/cuisine/:category", element: <Cousine /> },
+      { path: "/view/:idMeal", element: <MealDetailPage /> },
       { path: "/discover", element: <RandomPage /> },
       { path: "/favorites", element: <FavoritesPage /> },
       { path: "/search/:query", element: <SearchResults /> },
       { path: "/area", element: <BrowseByArea /> },
       { path: "*", element: <ErrorPage /> },
-
-      // {
-      //   path: "/cousine/:category",
-      //   element: <CategoryList />,
-      // },
-
-      // { path: "/category/:category", element: <CategoryMeals /> },
     ],
   },
 ];
@@ -44,6 +34,17 @@ const routes = [
 const router = createBrowserRouter(routes);
 
 function App() {
+  const dispatch = useDispatch();
+
+  // Initialize favorites from localStorage when the app loads
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    if (storedFavorites.length > 0) {
+      storedFavorites.forEach((meal) => {
+        dispatch(addToFavorites(meal));
+      });
+    }
+  }, [dispatch]);
   return <RouterProvider router={router} />;
 }
 

@@ -1,46 +1,27 @@
 import React from "react";
 
-import classes from "./FavoriteItem.module.css";
-// import Triangle from "../../asset/triangle.png";
+// import classes from "./FavoriteItem.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { addToFavorites, removeFromFavorites } from "../../store/actions/meal";
+import styled from "styled-components";
+
+const FavoriteImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  @media (max-width: 576px) {
+    height: auto;
+`;
 
 const FavoriteItem = ({ idMeal, strMeal, strMealThumb }) => {
-  const dispatch = useDispatch();
-  const favorites = useSelector((state) => state.favorites);
-
-  const isMealInFavorites = favorites.some(
-    (favMeal) => favMeal.idMeal === idMeal.idMeal
-  );
-
-  const handleToggleFavorites = () => {
-    if (isMealInFavorites) {
-      dispatch(removeFromFavorites(idMeal.idMeal));
-    } else {
-      dispatch(addToFavorites(idMeal));
-    }
-  };
   return (
-    <div className={classes.card}>
-      <li key={idMeal} className={classes.list}>
+    <div>
+      <li key={idMeal}>
         <Link to={`/movie/${idMeal}`}>
-          <img src={strMealThumb} alt={strMeal} />
+          <FavoriteImage src={strMealThumb} alt={strMeal} />
         </Link>
-        <div>
-          <div className={classes.overview}>
-            {/* <div className={classes.btn1}>
-              <button>
-                <img src={Triangle} alt="triangle" />
-              </button>
-            </div> */}
-            <div className={classes.btn2}>
-              <button onClick={handleToggleFavorites}>
-                {isMealInFavorites ? "-" : "+"}
-              </button>
-            </div>
-          </div>
-        </div>
       </li>
     </div>
   );

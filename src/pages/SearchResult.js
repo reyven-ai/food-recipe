@@ -1,20 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import MealList from "../components/Meal/MealList"; // You'll need to import the appropriate component for displaying meal results.
+import MealList from "../components/Meal/MealList";
+import styled from "styled-components";
+import { fetchMealsBySearchQuery } from "../api/apis";
+
+const CousineContainer = styled.div`
+  @media (max-width: 576px) {
+    // display: none;
+  }
+`;
+
+const Heading = styled.h2`
+  padding: 1rem;
+  display: flex;
+  width: 80%;
+  margin-left: 10rem;
+
+  @media (max-width: 576px) {
+    padding: 0rem;
+    margin-left: 1.2rem;
+    font-size: 17px;
+  }
+`;
+
+const Message = styled.p`
+  padding: 1rem;
+  text-align: center;
+`;
 
 const SearchResults = () => {
   const { query } = useParams();
   const [searchedMeals, setSearchedMeals] = useState([]);
+  const [isNoResults, setIsNoResults] = useState(false);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        // Replace this with the MealDB API URL
-        const response = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
-        );
-        const data = await response.json();
-        setSearchedMeals(data.meals || []); // Assuming the MealDB response contains a "meals" property.
+        const meals = await fetchMealsBySearchQuery(query);
+        setSearchedMeals(meals);
+
+        // Check if there are no search results
+        setIsNoResults(meals.length === 0);
       } catch (error) {
         console.error("Error fetching search results:", error);
       }
@@ -24,11 +50,16 @@ const SearchResults = () => {
   }, [query]);
 
   return (
-    <div>
-      <h2>Search results for: {decodeURIComponent(query)}</h2>
-      <MealList meals={searchedMeals} title="" />{" "}
-      {/* Replace "MealList" with your actual meal component */}
-    </div>
+    <CousineContainer>
+      <Heading>
+        Search results for "<span>{decodeURIComponent(query)}</span>"
+      </Heading>
+      {isNoResults ? (
+        <Message>No results found for "{decodeURIComponent(query)}"</Message>
+      ) : (
+        <MealList meals={searchedMeals} title="" />
+      )}
+    </CousineContainer>
   );
 };
 

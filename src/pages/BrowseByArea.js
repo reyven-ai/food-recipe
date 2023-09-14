@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MealsByArea from "../components/Browse/Area";
 import styled from "styled-components";
+import { useLocalStorage } from "../useHooks/useLocalStorage";
 
 const StyledSelect = styled.select`
   padding: 10px;
@@ -8,6 +9,19 @@ const StyledSelect = styled.select`
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 200px;
+
+  @media (max-width: 576px) {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+`;
+
+const Heading = styled.h1`
+  @media (max-width: 576px) {
+    font-size: 20px;
+    margin-bottom: 25px;
+    width: 100%;
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -15,6 +29,11 @@ const FlexContainer = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-top: 2rem;
+
+  @media (max-width: 576px) {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 1rem;
 `;
 
 const OptionsContainer = styled.div`
@@ -22,11 +41,17 @@ const OptionsContainer = styled.div`
   // flex-direction: column;
   gap: 30px;
   align-items: flex-start;
+
+  @media (max-width: 576px) {
+    ;
 `;
 
-function App() {
-  const [selectedArea, setSelectedArea] = useState(""); // Initialize with an empty string
-  const [selectedLetter, setSelectedLetter] = useState("");
+function BrowseByArea() {
+  const [selectedArea, setSelectedArea] = useLocalStorage("selectedArea", ""); // Initialize with an empty string
+  const [selectedLetter, setSelectedLetter] = useLocalStorage(
+    "selectedLetter",
+    ""
+  );
 
   const handleAreaChange = (event) => {
     setSelectedArea(event.target.value);
@@ -36,12 +61,20 @@ function App() {
     setSelectedLetter(event.target.value);
   };
 
+  useEffect(() => {
+    setSelectedArea(selectedArea); // Update localStorage for selectedArea
+  }, [selectedArea]);
+
+  useEffect(() => {
+    setSelectedLetter(selectedLetter); // Update localStorage for selectedLetter
+  }, [selectedLetter]);
+
   return (
     <div>
       <FlexContainer>
-        <h1>
+        <Heading>
           Browse By <span>Country</span>
-        </h1>
+        </Heading>
         <OptionsContainer>
           <StyledSelect value={selectedArea} onChange={handleAreaChange}>
             <option value="">Select an area</option>
@@ -90,4 +123,4 @@ function App() {
   );
 }
 
-export default App;
+export default BrowseByArea;
