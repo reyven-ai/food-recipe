@@ -1,6 +1,5 @@
 import React from "react";
 
-// import classes from "./FavoriteItem.module.css";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
