@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
-// import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import FavoriteItem from "../components/Favorites/FavoriteItem";
 
