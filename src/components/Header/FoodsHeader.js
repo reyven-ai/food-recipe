@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,7 +6,6 @@ import SearchHistory from "./SearchHistory";
 
 import styled from "styled-components";
 import MenuButton from "../MenuButton/MenuButton";
-import SearchButtonMobile from "../MenuButton/SearchButtonMobile";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -234,7 +232,6 @@ const FoodHeaders = () => {
             onRemoveItem={handleRemoveItem}
           />
         </Form>
-        {/* <SearchButtonMobile /> */}
         <MenuButton />
       </Handle>
     </HeaderContainer>
