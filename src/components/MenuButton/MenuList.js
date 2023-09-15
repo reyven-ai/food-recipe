@@ -1,39 +1,52 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import Close from "../../assests/close.png";
-const MenuListContainer = styled.ul`
-  list-style: none;
-  padding: 0;
-  text-align: left;
-  margin-top: 2rem;
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faHeart,
+  faBowlFood,
+  faGlobe,
+} from "@fortawesome/free-solid-svg-icons";
+
+const NavContainer = styled.div`
+display: none;
+box-shadow: none;
+
+@media (max-width: 820px) {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  height: 4rem;
 `;
 
-const MenuItem = styled.li`
-  font-size: 16px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  transition: color 0.3s;
-  color: black;
-
-  &:hover {
-    color: #ff6600; /* Change the color on hover */
-  }
-`;
-
-const MenuLink = styled(NavLink)`
-  font-size: 16px;
-  color: black;
-  font-weight: 700;
+const MenuItem = styled(NavLink)`
+@media (max-width: 576px) {
+  flex: 1;
+  text-align: center;
   text-decoration: none;
-
-  &:hover {
-    color: #ff6600; /* Change the color on hover */
-  }
+  color: black;
+  padding: 5px;
+  transition: background-color 0.3s;
+  font-size: 12px;
+  flex-direction: column;
+  display: flex;
 
   &.active {
     color: #00b14f;
-    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: #eee;
   }
 `;
 
@@ -48,40 +61,49 @@ const CloseButton = styled.button`
   margin-bottom: 3rem;
 `;
 
-const CloseImg = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const MenuList = ({ closeModal }) => {
-  const handleLinkClick = () => {
-    closeModal();
-  };
-
+function MenuList() {
   return (
     <>
-      <CloseButton onClick={closeModal}>
-        <CloseImg src={Close}></CloseImg>
-      </CloseButton>
-      <MenuListContainer>
-        <MenuItem>
-          <MenuLink to="/cuisine" onClick={handleLinkClick}>
-            Cuisine
-          </MenuLink>
+      <NavContainer>
+        <MenuItem to="/">
+          <FontAwesomeIcon
+            icon={faHome}
+            style={{
+              fontSize: "15px",
+            }}
+          />
+          Home
         </MenuItem>
-        <MenuItem>
-          <MenuLink to="/favorites" onClick={handleLinkClick}>
-            Favorites
-          </MenuLink>
+        <MenuItem to="/cuisine">
+          <FontAwesomeIcon
+            icon={faBowlFood}
+            style={{
+              fontSize: "15px",
+            }}
+          />
+          Cuisine
         </MenuItem>
-        <MenuItem>
-          <MenuLink to="/area" onClick={handleLinkClick}>
-            Browse by Country
-          </MenuLink>
+        <MenuItem to="/favorites">
+          <FontAwesomeIcon
+            icon={faHeart}
+            style={{
+              fontSize: "15px",
+            }}
+          />
+          Favorites
         </MenuItem>
-      </MenuListContainer>
+        <MenuItem to="/area">
+          <FontAwesomeIcon
+            icon={faGlobe}
+            style={{
+              fontSize: "15px",
+            }}
+          />
+          Area
+        </MenuItem>
+      </NavContainer>
     </>
   );
-};
+}
 
 export default MenuList;
