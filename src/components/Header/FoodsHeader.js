@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import Search from "../../assests/search.png";
-import SearchHistory from "./SearchHistory";
+// import SearchHistory from "./SearchHistory";
 
 import styled from "styled-components";
 import MenuButton from "../MenuButton/MenuButton";
@@ -32,7 +32,7 @@ const List = styled.ul`
   font-size: 16px;
   margin-left: 3rem;
 
-  @media (max-width: 576px) {
+  @media (max-width: 820px) {
     display: ${({ isMenuOpen }) => (isMenuOpen ? "flex" : "none")};
     gap: 1rem;
     font-weight: 600;
@@ -126,7 +126,7 @@ const Input = styled.input`
   border-radius: 24px;
   // Add other styles here
 
-  @media (max-width: 576px) {
+  @media (max-width: 820px) {
     width: 82%;
     height: 35px;
     border-radius: 18px;
@@ -150,8 +150,8 @@ const FoodHeaders = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { query } = useParams();
-  const [searchHistory, setSearchHistory] = useState([]);
-  const [showSearchHistory, setShowSearchHistory] = useState(false);
+  // const [searchHistory, setSearchHistory] = useState([]);
+  // const [showSearchHistory, setShowSearchHistory] = useState(false);
 
   useEffect(() => {
     if (query) {
@@ -159,12 +159,12 @@ const FoodHeaders = () => {
     }
   }, [query]);
 
-  useEffect(() => {
-    const storedHistory = localStorage.getItem("searchHistory");
-    if (storedHistory) {
-      setSearchHistory(JSON.parse(storedHistory));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedHistory = localStorage.getItem("searchHistory");
+  //   if (storedHistory) {
+  //     setSearchHistory(JSON.parse(storedHistory));
+  //   }
+  // }, []);
 
   // Function to handle search and update search history
   const handleSearch = async (e) => {
@@ -186,12 +186,12 @@ const FoodHeaders = () => {
     }
   };
 
-  const handleRemoveItem = (index) => {
-    const updatedHistory = [...searchHistory];
-    updatedHistory.splice(index, 1);
-    setSearchHistory(updatedHistory);
-    localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
-  };
+  // const handleRemoveItem = (index) => {
+  //   const updatedHistory = [...searchHistory];
+  //   updatedHistory.splice(index, 1);
+  //   setSearchHistory(updatedHistory);
+  //   localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+  // };
 
   return (
     <HeaderContainer>
@@ -223,14 +223,14 @@ const FoodHeaders = () => {
             placeholder="Enter meal name"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => setShowSearchHistory(true)}
-            onBlur={() => setShowSearchHistory(false)}
+            // onFocus={() => setShowSearchHistory(true)}
+            // onBlur={() => setShowSearchHistory(false)}
           />
-          <SearchHistory
+          {/* <SearchHistory
             show={showSearchHistory}
             searchHistory={searchHistory}
             onRemoveItem={handleRemoveItem}
-          />
+          /> */}
         </Form>
         <MenuButton />
       </Handle>

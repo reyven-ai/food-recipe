@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Modal from "../UI/Modal";
-import MenuList from "./MenuList";
+// import MenuList from "./MenuList";
+import Close from "../../assests/close.png";
 
 const Menu = styled.button`
   display: none; /* Initially hide the menu button */
@@ -23,6 +24,11 @@ const Menu = styled.button`
   }
 `;
 
+const CloseImg = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
 const MenuButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -38,16 +44,12 @@ const MenuButton = () => {
 
   return (
     <>
-      <Menu
-        onClick={openModal}
-        // className={`${classes.menuButton} ${isMenuOpen ? "active" : ""}`}
-        aria-label="Menu"
-      >
+      <Menu onClick={openModal} aria-label="Menu">
         ☰
       </Menu>
       {isModalOpen && (
-        <Modal closeModal={closeModal}>
-          <MenuList closeModal={closeModal} /> {/* Pass closeModal function */}
+        <Modal>
+          <CloseImg onClick={closeModal} src={Close} alt="Close" />
         </Modal>
       )}
     </>
