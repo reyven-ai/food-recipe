@@ -28,6 +28,7 @@ const List = styled.ul`
 
   @media (max-width: 576px) {
     padding: 0.2rem 0rem;
+  }
 `;
 
 const HistoryHandler = styled.div`
@@ -50,13 +51,14 @@ const Item = styled.li`
 `;
 
 const HistoryImg = styled.img`
- width: 17px;
- height: 17px;
- text-align: center;
- margin-top: 3px;
+  width: 17px;
+  height: 17px;
+  text-align: center;
+  margin-top: 3px;
 
   @media (max-width: 576px) {
     // padding: 0.2rem 2.5rem;
+  }
 `;
 
 const HistoryButton = styled.button`

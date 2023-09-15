@@ -11,36 +11,37 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavContainer = styled.div`
-display: none;
-box-shadow: none;
+  display: none;
+  box-shadow: none;
 
-@media (max-width: 820px) {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: white;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  height: 4rem;
+  @media (max-width: 820px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    height: 4rem;
+  }
 `;
 
 const MenuItem = styled(NavLink)`
-@media (max-width: 576px) {
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-  color: black;
-  padding: 5px;
-  transition: background-color 0.3s;
-  font-size: 12px;
-  flex-direction: column;
-  display: flex;
-
+  @media (max-width: 576px) {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    transition: background-color 0.3s;
+    font-size: 12px;
+    flex-direction: column;
+    display: flex;
+  }
   &.active {
     color: #00b14f;
   }
@@ -50,16 +51,16 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 7px;
-  background: transparent;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  margin-bottom: 3rem;
-`;
+// const CloseButton = styled.button`
+//   position: absolute;
+//   top: 10px;
+//   right: 7px;
+//   background: transparent;
+//   border: none;
+//   font-size: 16px;
+//   cursor: pointer;
+//   margin-bottom: 3rem;
+// `;
 
 function MenuList() {
   return (
@@ -69,7 +70,7 @@ function MenuList() {
           <FontAwesomeIcon
             icon={faHome}
             style={{
-              fontSize: "15px",
+              fontSize: "18px",
             }}
           />
           Home
@@ -78,7 +79,7 @@ function MenuList() {
           <FontAwesomeIcon
             icon={faBowlFood}
             style={{
-              fontSize: "15px",
+              fontSize: "18px",
             }}
           />
           Cuisine
@@ -87,7 +88,7 @@ function MenuList() {
           <FontAwesomeIcon
             icon={faHeart}
             style={{
-              fontSize: "15px",
+              fontSize: "18px",
             }}
           />
           Favorites
@@ -96,7 +97,7 @@ function MenuList() {
           <FontAwesomeIcon
             icon={faGlobe}
             style={{
-              fontSize: "15px",
+              fontSize: "18px",
             }}
           />
           Area

@@ -12,6 +12,7 @@ const HeroContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 3rem;
+  margin-bottom: 5rem;
 
   @media (max-width: 576px) {
     flex-direction: column;

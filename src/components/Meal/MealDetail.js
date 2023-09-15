@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMealById } from "../../api/apis";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const DetailContainer = styled.div`
   display: block;
@@ -27,6 +30,7 @@ const ButtonStyled = styled.button`
   font-weight: 600;
   width: 100%; /* Set button width to 100% */
   margin-top: 0.5rem;
+  color: black;
 
   ${(props) =>
     props.active &&
@@ -56,6 +60,11 @@ const MoreContainer = styled.div`
 const HeadingStyled = styled.h2`
   text-align: center;
   font-size: 18px;
+`;
+
+const CloseContainer = styled.div`
+  text-align: left;
+  padding-top: 10px;
 `;
 
 function MealDetailPage() {
@@ -92,18 +101,28 @@ function MealDetailPage() {
 
   return (
     <DetailContainer>
+      <CloseContainer>
+        <Link to="/cuisine">
+          <FontAwesomeIcon
+            icon={faClose}
+            style={{
+              fontSize: "18px",
+              color: "black",
+            }}
+          />
+        </Link>
+      </CloseContainer>
       <div>
         <HeadingStyled>{mealDetail.strMeal}</HeadingStyled>
         <ImageStyled src={mealDetail.strMealThumb} alt={mealDetail.strMeal} />
       </div>
       <MoreContainer>
-        {/* <ButtonContainer> */}
         <div>
           <ButtonStyled
             onClick={() => handleTabChange("Country")}
             active={activeTab === "Country" ? "activeTab" : ""}
           >
-            Country
+            Area
           </ButtonStyled>
           {activeTab === "Country" && <p>{mealDetail.strArea}</p>}
         </div>

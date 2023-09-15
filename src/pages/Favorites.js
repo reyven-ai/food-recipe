@@ -51,6 +51,7 @@ const FavoritesHeading = styled.h2`
   @media (max-width: 576px) {
     font-size: 18px;
     padding-left: 1.5rem;
+  }
 `;
 
 const Favorites = (props) => {
