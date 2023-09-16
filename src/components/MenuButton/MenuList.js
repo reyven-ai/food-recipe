@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import "font-awesome/css/font-awesome.min.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,6 +9,7 @@ import {
   faHeart,
   faBowlFood,
   faGlobe,
+  faAdd,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavContainer = styled.div`
@@ -35,7 +37,7 @@ const MenuItem = styled(NavLink)`
     flex: 1;
     text-align: center;
     text-decoration: none;
-    color: black;
+    color: rgba(0, 0, 0, 0.6);
     padding: 5px;
     transition: background-color 0.3s;
     font-size: 12px;
@@ -51,16 +53,16 @@ const MenuItem = styled(NavLink)`
   }
 `;
 
-// const CloseButton = styled.button`
-//   position: absolute;
-//   top: 10px;
-//   right: 7px;
-//   background: transparent;
-//   border: none;
-//   font-size: 16px;
-//   cursor: pointer;
-//   margin-bottom: 3rem;
-// `;
+const Button = styled.button`
+  background: transparent;
+  border: 1px solid;
+  padding: 0.3rem 0.5rem;
+  border: 2px solid #00b14f;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+`;
 
 function MenuList() {
   return (
@@ -84,6 +86,19 @@ function MenuList() {
           />
           Cuisine
         </MenuItem>
+        <Button>
+          <FontAwesomeIcon
+            icon={faAdd}
+            style={{
+              fontSize: "18px",
+              color: "black",
+              // padding: "0.5rem, 1rem",
+              // backgroundColor: "none",
+            }}
+          />
+          {/* Post */}
+          {/* </FontAwesomeIcon> */}
+        </Button>
         <MenuItem to="/favorites">
           <FontAwesomeIcon
             icon={faHeart}

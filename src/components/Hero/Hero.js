@@ -20,7 +20,7 @@ const HeroContainer = styled.div`
     text-align: center;
     width: 100%;
     margin-top: 1rem;
-    gap: 60px;
+    gap: 30px;
   }
 `;
 
@@ -114,6 +114,7 @@ const Div = styled.div`
 
     @media (max-width: 576px) {
       font-size: 18px;
+      display: none;
     }
   }
 `;
@@ -121,6 +122,10 @@ const Div = styled.div`
 const CarouselContainer = styled(Carousel)`
   background-color: rgba(0, 0, 0, 0.99);
   border-radius: 15px;
+
+  @media (max-width: 576px) {
+    /* display: none; */
+  }
 `;
 
 const CarouselImg = styled.img`
@@ -132,6 +137,7 @@ const CarouselImg = styled.img`
 
   @media (max-width: 576px) {
     height: auto;
+    /* display: none; */
   }
 `;
 

@@ -69,7 +69,7 @@ const CategoryItem = styled.li`
     text-decoration: none;
 
     @media (max-width: 576px) {
-      padding: 0.3rem 0.7rem;
+      padding: 0.3rem 0.8rem;
       font-size: 13px;
       border-radius: 18px;
     }
