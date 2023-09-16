@@ -2,7 +2,8 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import Modal from "../UI/Modal";
 // import MenuList from "./MenuList";
-import Close from "../../assests/close.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const Menu = styled.button`
   display: none; /* Initially hide the menu button */
@@ -24,9 +25,9 @@ const Menu = styled.button`
   }
 `;
 
-const CloseImg = styled.img`
-  width: 24px;
-  height: 24px;
+const CloseButton = styled.button`
+  background-color: transparent;
+  border: none;
 `;
 
 const MenuButton = () => {
@@ -49,7 +50,16 @@ const MenuButton = () => {
       </Menu>
       {isModalOpen && (
         <Modal>
-          <CloseImg onClick={closeModal} src={Close} alt="Close" />
+          <CloseButton onClick={closeModal}>
+            <FontAwesomeIcon
+              icon={faClose}
+              style={{
+                fontSize: "20px",
+                color: "black",
+              }}
+            />
+          </CloseButton>
+          {/* <CloseImg onClick={closeModal} src={Close} alt="Close" /> */}
         </Modal>
       )}
     </>

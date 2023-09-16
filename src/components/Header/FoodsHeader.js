@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import MenuButton from "../MenuButton/MenuButton";
@@ -43,14 +43,14 @@ const List = styled.ul`
 
 const Logo = styled.div`
   a {
-    font-size: 27px;
+    font-size: 20px;
     font-weight: 700;
     text-decoration: none;
     color: black;
   }
   @media (max-width: 576px) {
     font-size: 20px;
-    height: auto;
+    /* height: auto; */
   }
 `;
 
@@ -97,8 +97,10 @@ const SearchButton = styled.button`
   cursor: pointer;
   padding: 0.4rem 0.4rem 0.4rem 0.6rem;
   position: relative;
-  /* left: 40px; */
-  // Add other styles here
+  left: 40px;
+  @media (max-width: 700px) {
+    /* left: 0; */
+  }
 `;
 
 const Input = styled.input`
@@ -106,23 +108,23 @@ const Input = styled.input`
   width: 350px;
   border: 1px solid #ccc;
   background-color: white;
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 2.7rem;
   transition: width 0.3s ease-in-out;
   color: black;
   font-size: 16px;
-  border-radius: 24px;
+  border-radius: 20px;
   // Add other styles here
 
   @media (max-width: 820px) {
-    width: 0;
+    width: 82%;
     height: 35px;
     border-radius: 18px;
     font-size: 13px;
     padding-right: 1.5rem;
-    display: none;
+    /* display: none; */
   }
   &:focus {
-    width: 350px;
+    /* width: 350px; */
     outline: #00b14f;
     border: 1px solid #00b14f;
     box-shadow: 0 1px 5px #00b14f;
@@ -184,11 +186,16 @@ const FoodHeaders = () => {
     <HeaderContainer>
       <Nav>
         <Logo>
-          <StyledNavLink to="/" end>
+          <Link to="/" end>
             Food<span>Mood</span>
-          </StyledNavLink>
+          </Link>
         </Logo>
         <List>
+          <li>
+            <StyledNavLink to="/" end>
+              Home
+            </StyledNavLink>
+          </li>
           <li>
             <StyledNavLink to="/cuisine">Cuisine</StyledNavLink>
           </li>
