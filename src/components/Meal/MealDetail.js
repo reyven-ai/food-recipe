@@ -12,6 +12,7 @@ const DetailContainer = styled.div`
   gap: 30px;
   justify-content: center;
   align-items: center;
+  padding-bottom: 5rem;
 `;
 
 const ImageStyled = styled.img`
