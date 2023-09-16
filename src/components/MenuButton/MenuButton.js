@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Modal from "../UI/Modal";
-// import MenuList from "./MenuList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,13 +13,11 @@ const Menu = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 30px;
-  // margin-right: 3rem;
   align-items: flex-end;
   text-align: right;
   position: relative;
   margin-bottom: 4px;
   @media (max-width: 700px) {
-    /* Show the menu button when screen width is 700px or less */
     display: block;
   }
 `;
