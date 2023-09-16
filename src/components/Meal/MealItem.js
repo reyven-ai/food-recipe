@@ -6,12 +6,10 @@ import styled from "styled-components"; // Import styled-components
 
 const MealContainer = styled.div`
   position: relative;
-
-  // @media (min-width: 601px) {
-    &:hover .overview {
-      visibility: visible;
-      opacity: 1;
-    // }
+  &:hover .overview {
+    visibility: visible;
+    opacity: 1;
+  }
 `;
 
 const MealImage = styled.img`
@@ -29,6 +27,7 @@ const MealName = styled.p`
 
   @media (max-width: 576px) {
     margin-top: 5px;
+  }
 `;
 
 const MealLink = styled(Link)`
@@ -40,6 +39,7 @@ const MealLink = styled(Link)`
   @media (max-width: 576px) {
     font-size: 12px;
     padding-top: 0;
+  }
 `;
 
 const Overview = styled.div`

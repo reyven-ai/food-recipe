@@ -14,6 +14,7 @@ const StyledSelect = styled.select`
     width: 100%;
     height: 40px;
     font-size: 14px;
+  }
 `;
 
 const Heading = styled.h1`
@@ -34,6 +35,7 @@ const FlexContainer = styled.div`
     width: 100%;
     flex-direction: column;
     margin-top: 1rem;
+  }
 `;
 
 const OptionsContainer = styled.div`
@@ -43,7 +45,7 @@ const OptionsContainer = styled.div`
   align-items: flex-start;
 
   @media (max-width: 576px) {
-    ;
+  }
 `;
 
 function BrowseByArea() {

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
-import Search from "../../assests/search.png";
-// import SearchHistory from "./SearchHistory";
-
 import styled from "styled-components";
 import MenuButton from "../MenuButton/MenuButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -17,6 +16,7 @@ const HeaderContainer = styled.header`
 
   @media (max-width: 576px) {
     padding: 1% 4%;
+  }
 `;
 
 const Nav = styled.nav`
@@ -47,10 +47,10 @@ const Logo = styled.div`
     font-weight: 700;
     text-decoration: none;
     color: black;
-
-    @media (max-width: 576px) {
-      font-size: 20px;
-      height: auto;
+  }
+  @media (max-width: 576px) {
+    font-size: 20px;
+    height: auto;
   }
 `;
 
@@ -61,19 +61,6 @@ const Handle = styled.div`
   padding: 0;
   justify-content: around-between;
   gap: 5px;
-`;
-
-const SearchImage = styled.img`
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  margin-top: 3px;
-  transform: rotate(5deg);
-
-  @media (max-width: 576px) {
-    width: 18px;
-    height: auto;
-  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -110,7 +97,7 @@ const SearchButton = styled.button`
   cursor: pointer;
   padding: 0.4rem 0.4rem 0.4rem 0.6rem;
   position: relative;
-  left: 40px;
+  /* left: 40px; */
   // Add other styles here
 `;
 
@@ -127,22 +114,22 @@ const Input = styled.input`
   // Add other styles here
 
   @media (max-width: 820px) {
-    width: 82%;
+    width: 0;
     height: 35px;
     border-radius: 18px;
     font-size: 13px;
     padding-right: 1.5rem;
-    // display: none;
+    display: none;
   }
   &:focus {
     width: 350px;
     outline: #00b14f;
     border: 1px solid #00b14f;
     box-shadow: 0 1px 5px #00b14f;
-
-    @media (max-width: 576px) {
-      width: 82%;
-      height: 32px;
+  }
+  @media (max-width: 576px) {
+    width: 82%;
+    height: 32px;
   }
 `;
 
@@ -216,7 +203,14 @@ const FoodHeaders = () => {
       <Handle>
         <Form onSubmit={handleSearch}>
           <SearchButton onClick={handleSearch} type="submit">
-            <SearchImage src={Search} alt="Search" />
+            <FontAwesomeIcon
+              icon={faSearch}
+              style={{
+                fontSize: "18px",
+                color: "black",
+              }}
+            />
+            {/* <SearchImage src={Search} alt="Search" /> */}
           </SearchButton>
           <Input
             type="text"
