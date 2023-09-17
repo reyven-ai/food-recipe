@@ -1,87 +1,125 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import Close from "../../assests/close.png";
-const MenuListContainer = styled.ul`
-  list-style: none;
-  padding: 0;
-  text-align: left;
-  margin-top: 2rem;
-`;
+import "font-awesome/css/font-awesome.min.css";
 
-const MenuItem = styled.li`
-  font-size: 16px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  transition: color 0.3s;
-  color: black;
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faHeart,
+  faBowlFood,
+  faGlobe,
+  faAdd,
+} from "@fortawesome/free-solid-svg-icons";
 
-  &:hover {
-    color: #ff6600; /* Change the color on hover */
+const NavContainer = styled.div`
+  display: none;
+  box-shadow: none;
+
+  @media (max-width: 820px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    height: 4rem;
   }
 `;
 
-const MenuLink = styled(NavLink)`
-  font-size: 16px;
-  color: black;
-  font-weight: 700;
-  text-decoration: none;
-
-  &:hover {
-    color: #ff6600; /* Change the color on hover */
+const MenuItem = styled(NavLink)`
+  @media (max-width: 576px) {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+    padding: 5px;
+    transition: background-color 0.3s;
+    font-size: 12px;
+    flex-direction: column;
+    display: flex;
   }
-
   &.active {
     color: #00b14f;
-    font-weight: 600;
+  }
+
+  &:hover {
+    background-color: #eee;
   }
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: 10px;
-  right: 7px;
+const Button = styled.button`
   background: transparent;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  margin-bottom: 3rem;
+  border: 1px solid;
+  padding: 0.3rem 0.5rem;
+  border: 2px solid #00b14f;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 `;
 
-const CloseImg = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const MenuList = ({ closeModal }) => {
-  const handleLinkClick = () => {
-    closeModal();
-  };
-
+function MenuList() {
   return (
     <>
-      <CloseButton onClick={closeModal}>
-        <CloseImg src={Close}></CloseImg>
-      </CloseButton>
-      <MenuListContainer>
-        <MenuItem>
-          <MenuLink to="/cuisine" onClick={handleLinkClick}>
-            Cuisine
-          </MenuLink>
+      <NavContainer>
+        <MenuItem to="/">
+          <FontAwesomeIcon
+            icon={faHome}
+            style={{
+              fontSize: "18px",
+            }}
+          />
+          Home
         </MenuItem>
-        <MenuItem>
-          <MenuLink to="/favorites" onClick={handleLinkClick}>
-            Favorites
-          </MenuLink>
+        <MenuItem to="/cuisine">
+          <FontAwesomeIcon
+            icon={faBowlFood}
+            style={{
+              fontSize: "18px",
+            }}
+          />
+          Cuisine
         </MenuItem>
-        <MenuItem>
-          <MenuLink to="/area" onClick={handleLinkClick}>
-            Browse by Country
-          </MenuLink>
+        <Button>
+          <FontAwesomeIcon
+            icon={faAdd}
+            style={{
+              fontSize: "18px",
+              color: "black",
+              // padding: "0.5rem, 1rem",
+              // backgroundColor: "none",
+            }}
+          />
+          {/* Post */}
+          {/* </FontAwesomeIcon> */}
+        </Button>
+        <MenuItem to="/favorites">
+          <FontAwesomeIcon
+            icon={faHeart}
+            style={{
+              fontSize: "18px",
+            }}
+          />
+          Favorites
         </MenuItem>
-      </MenuListContainer>
+        <MenuItem to="/area">
+          <FontAwesomeIcon
+            icon={faGlobe}
+            style={{
+              fontSize: "18px",
+            }}
+          />
+          Area
+        </MenuItem>
+      </NavContainer>
     </>
   );
-};
+}
 
 export default MenuList;

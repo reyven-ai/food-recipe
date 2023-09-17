@@ -11,6 +11,7 @@ const BrowseContainer = styled.div`
 
   @media (max-width: 576px) {
     margin-top: 2rem;
+  }
 `;
 
 const CountryHeader = styled.h2`
@@ -21,6 +22,7 @@ const CountryHeader = styled.h2`
   @media (max-width: 576px) {
     font-size: 16px;
     padding-left: 0.2rem;
+  }
 `;
 
 const BrowseList = styled.ul`

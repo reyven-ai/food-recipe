@@ -14,6 +14,7 @@ const MealContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     width: 90%;
     margin: 0.5rem auto;
+    padding-bottom: 4rem;
   }
 
   @media (min-width: 600px) {

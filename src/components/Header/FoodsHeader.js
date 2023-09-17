@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
-import Search from "../../assests/search.png";
-import SearchHistory from "./SearchHistory";
-
 import styled from "styled-components";
 import MenuButton from "../MenuButton/MenuButton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -17,6 +16,7 @@ const HeaderContainer = styled.header`
 
   @media (max-width: 576px) {
     padding: 1% 4%;
+  }
 `;
 
 const Nav = styled.nav`
@@ -32,7 +32,7 @@ const List = styled.ul`
   font-size: 16px;
   margin-left: 3rem;
 
-  @media (max-width: 576px) {
+  @media (max-width: 820px) {
     display: ${({ isMenuOpen }) => (isMenuOpen ? "flex" : "none")};
     gap: 1rem;
     font-weight: 600;
@@ -43,14 +43,14 @@ const List = styled.ul`
 
 const Logo = styled.div`
   a {
-    font-size: 27px;
+    font-size: 20px;
     font-weight: 700;
     text-decoration: none;
     color: black;
-
-    @media (max-width: 576px) {
-      font-size: 20px;
-      height: auto;
+  }
+  @media (max-width: 576px) {
+    font-size: 20px;
+    /* height: auto; */
   }
 `;
 
@@ -61,19 +61,6 @@ const Handle = styled.div`
   padding: 0;
   justify-content: around-between;
   gap: 5px;
-`;
-
-const SearchImage = styled.img`
-  width: 24px;
-  height: 24px;
-  text-align: center;
-  margin-top: 3px;
-  transform: rotate(5deg);
-
-  @media (max-width: 576px) {
-    width: 18px;
-    height: auto;
-  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -111,7 +98,9 @@ const SearchButton = styled.button`
   padding: 0.4rem 0.4rem 0.4rem 0.6rem;
   position: relative;
   left: 40px;
-  // Add other styles here
+  @media (max-width: 700px) {
+    /* left: 0; */
+  }
 `;
 
 const Input = styled.input`
@@ -119,30 +108,30 @@ const Input = styled.input`
   width: 350px;
   border: 1px solid #ccc;
   background-color: white;
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 2.7rem;
   transition: width 0.3s ease-in-out;
   color: black;
   font-size: 16px;
-  border-radius: 24px;
+  border-radius: 20px;
   // Add other styles here
 
-  @media (max-width: 576px) {
+  @media (max-width: 820px) {
     width: 82%;
     height: 35px;
     border-radius: 18px;
     font-size: 13px;
     padding-right: 1.5rem;
-    // display: none;
+    /* display: none; */
   }
   &:focus {
-    width: 350px;
+    /* width: 350px; */
     outline: #00b14f;
     border: 1px solid #00b14f;
     box-shadow: 0 1px 5px #00b14f;
-
-    @media (max-width: 576px) {
-      width: 82%;
-      height: 32px;
+  }
+  @media (max-width: 576px) {
+    width: 82%;
+    height: 32px;
   }
 `;
 
@@ -150,8 +139,8 @@ const FoodHeaders = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const { query } = useParams();
-  const [searchHistory, setSearchHistory] = useState([]);
-  const [showSearchHistory, setShowSearchHistory] = useState(false);
+  // const [searchHistory, setSearchHistory] = useState([]);
+  // const [showSearchHistory, setShowSearchHistory] = useState(false);
 
   useEffect(() => {
     if (query) {
@@ -159,12 +148,12 @@ const FoodHeaders = () => {
     }
   }, [query]);
 
-  useEffect(() => {
-    const storedHistory = localStorage.getItem("searchHistory");
-    if (storedHistory) {
-      setSearchHistory(JSON.parse(storedHistory));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedHistory = localStorage.getItem("searchHistory");
+  //   if (storedHistory) {
+  //     setSearchHistory(JSON.parse(storedHistory));
+  //   }
+  // }, []);
 
   // Function to handle search and update search history
   const handleSearch = async (e) => {
@@ -186,22 +175,27 @@ const FoodHeaders = () => {
     }
   };
 
-  const handleRemoveItem = (index) => {
-    const updatedHistory = [...searchHistory];
-    updatedHistory.splice(index, 1);
-    setSearchHistory(updatedHistory);
-    localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
-  };
+  // const handleRemoveItem = (index) => {
+  //   const updatedHistory = [...searchHistory];
+  //   updatedHistory.splice(index, 1);
+  //   setSearchHistory(updatedHistory);
+  //   localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
+  // };
 
   return (
     <HeaderContainer>
       <Nav>
         <Logo>
-          <StyledNavLink to="/" end>
+          <Link to="/" end>
             Food<span>Mood</span>
-          </StyledNavLink>
+          </Link>
         </Logo>
         <List>
+          <li>
+            <StyledNavLink to="/" end>
+              Home
+            </StyledNavLink>
+          </li>
           <li>
             <StyledNavLink to="/cuisine">Cuisine</StyledNavLink>
           </li>
@@ -216,21 +210,28 @@ const FoodHeaders = () => {
       <Handle>
         <Form onSubmit={handleSearch}>
           <SearchButton onClick={handleSearch} type="submit">
-            <SearchImage src={Search} alt="Search" />
+            <FontAwesomeIcon
+              icon={faSearch}
+              style={{
+                fontSize: "18px",
+                color: "black",
+              }}
+            />
+            {/* <SearchImage src={Search} alt="Search" /> */}
           </SearchButton>
           <Input
             type="text"
             placeholder="Enter meal name"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => setShowSearchHistory(true)}
-            onBlur={() => setShowSearchHistory(false)}
+            // onFocus={() => setShowSearchHistory(true)}
+            // onBlur={() => setShowSearchHistory(false)}
           />
-          <SearchHistory
+          {/* <SearchHistory
             show={showSearchHistory}
             searchHistory={searchHistory}
             onRemoveItem={handleRemoveItem}
-          />
+          /> */}
         </Form>
         <MenuButton />
       </Handle>

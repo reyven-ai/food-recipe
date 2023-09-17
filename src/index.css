@@ -60,4 +60,5 @@ h2 {
 
 span {
   color: #00b14f;
+  flex-direction: column;
 }

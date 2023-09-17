@@ -23,6 +23,7 @@ const CousineContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     margin-top: 1rem;
+  }
 `;
 
 const Description = styled.p`
@@ -34,6 +35,7 @@ const Description = styled.p`
     width: 100%;
     font-size: 15px;
     padding: 0 0.5rem;
+  }
 `;
 
 const CategoryList = styled.ul`
@@ -46,14 +48,15 @@ const CategoryList = styled.ul`
   margin: auto;
   list-style: none;
   // box-shadow: 0 1px 5px #00b14f;
-  
+
   // padding: 0;
 
   @media (max-width: 576px) {
     width: 80%; /* Make the category list full-width on smaller screens */
     padding-top: 1.2rem;
     height: 70px;
-    gap: 13px
+    gap: 13px;
+  }
 `;
 
 const CategoryItem = styled.li`
@@ -69,7 +72,7 @@ const CategoryItem = styled.li`
     text-decoration: none;
 
     @media (max-width: 576px) {
-      padding: 0.3rem 0.7rem;
+      padding: 0.3rem 0.8rem;
       font-size: 13px;
       border-radius: 18px;
     }
