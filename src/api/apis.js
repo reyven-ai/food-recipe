@@ -1,9 +1,9 @@
 const BASE_API_URL = "https://www.themealdb.com/api/json/v1/1";
-const MEALS_API_URL = `${BASE_API_URL}/list.php?c=list`;
-const RANDOM_API_URL = `${BASE_API_URL}/random.php`;
+// const MEALS_API_URL = `${BASE_API_URL}/list.php?c=list`;
+// const RANDOM_API_URL = `${BASE_API_URL}/random.php`;
 
 export const fetchMealCategories = async () => {
-  const response = await fetch(MEALS_API_URL);
+  const response = await fetch(`${BASE_API_URL}/list.php?c=list`);
   if (!response.ok) {
     throw new Error("Failed to fetch meal categories");
   }
@@ -12,7 +12,7 @@ export const fetchMealCategories = async () => {
 };
 
 export const fetchRandomMeal = async () => {
-  const response = await fetch(RANDOM_API_URL);
+  const response = await fetch(`${BASE_API_URL}/random.php`);
   if (!response.ok) {
     throw new Error("Failed to fetch random meal");
   }
