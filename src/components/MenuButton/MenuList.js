@@ -9,7 +9,7 @@ import {
   faHeart,
   faBowlFood,
   faGlobe,
-  faAdd,
+  // faAdd,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavContainer = styled.div`
@@ -86,7 +86,7 @@ function MenuList() {
           />
           Cuisine
         </MenuItem>
-        <Button>
+        {/* <Button>
           <FontAwesomeIcon
             icon={faAdd}
             style={{
@@ -95,10 +95,7 @@ function MenuList() {
               // padding: "0.5rem, 1rem",
               // backgroundColor: "none",
             }}
-          />
-          {/* Post */}
-          {/* </FontAwesomeIcon> */}
-        </Button>
+          /> */}
         <MenuItem to="/favorites">
           <FontAwesomeIcon
             icon={faHeart}

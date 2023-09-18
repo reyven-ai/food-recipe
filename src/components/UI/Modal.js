@@ -1,38 +1,3 @@
-// import { Fragment } from "react";
-// import ReactDOM from "react-dom";
-
-// import classes from "./Modal.module.css";
-
-// const Backdrop = (props) => {
-//   return <div className={classes.backdrop} onClick={props.onClose}></div>;
-// };
-
-// const ModalOverlay = (props) => {
-//   return (
-//     <div className={classes.modal}>
-//       <div className={classes.content}>{props.children}</div>
-//     </div>
-//   );
-// };
-
-// const portalElement = document.getElementById("overlays");
-
-// const Modal = (props) => {
-//   return (
-//     <Fragment>
-//       {ReactDOM.createPortal(
-//         <Backdrop onClose={props.onClose} />,
-//         portalElement
-//       )}
-//       {ReactDOM.createPortal(
-//         <ModalOverlay>{props.children}</ModalOverlay>,
-//         portalElement
-//       )}
-//     </Fragment>
-//   );
-// };
-
-// export default Modal;
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
 import styled, { createGlobalStyle, keyframes } from "styled-components";
@@ -48,14 +13,12 @@ const leftKeyframes = keyframes`
   }
 `;
 
-// Create global styles for the keyframes
 const GlobalStyle = createGlobalStyle`
   @keyframes left {
     ${leftKeyframes}
   }
 `;
 
-// Styled-components for backdrop
 const BackdropStyled = styled.div`
   position: fixed;
   top: 0;
@@ -66,17 +29,13 @@ const BackdropStyled = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
-// Styled-components for modal
 const ModalOverlayStyled = styled.div`
   position: fixed;
   height: 100vh;
   top: 0;
   right: 0%;
-<<<<<<< HEAD
   width: 50%;
-=======
   width: 80%;
->>>>>>> added-code
   background-color: #f5f5f5;
   padding: 1rem 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
