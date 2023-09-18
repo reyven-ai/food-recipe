@@ -18,11 +18,11 @@ jobs:
         with:
           node-version: '16'
 
-     - name: Update Firebase CLI
-       run: npm install -g firebase-tools@latest
+      - name: Update Firebase CLI
+        run: npm install -g firebase-tools@latest
 
-     - name: Authenticate with Firebase
-  run: firebase login:ci --token "$FIREBASE_TOKEN"
+      - name: Authenticate with Firebase
+        run: firebase login:ci --token "$FIREBASE_TOKEN"
   
       - name: Deploy to Firebase
         run: firebase deploy --only hosting
