@@ -9,7 +9,7 @@ import {
   faHeart,
   faBowlFood,
   faGlobe,
-  // faAdd,
+  faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavContainer = styled.div`
@@ -79,6 +79,7 @@ function MenuList() {
         </MenuItem>
         <MenuItem to="/cuisine">
           <FontAwesomeIcon
+            // icon={faBowlFood}
             icon={faBowlFood}
             style={{
               fontSize: "18px",
@@ -88,7 +89,7 @@ function MenuList() {
         </MenuItem>
         {/* <Button>
           <FontAwesomeIcon
-            icon={faAdd}
+            icon={faArrowRightToBracket}
             style={{
               fontSize: "18px",
               color: "black",

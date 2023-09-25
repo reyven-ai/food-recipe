@@ -43,7 +43,7 @@ const List = styled.ul`
 
 const Logo = styled.div`
   a {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 700;
     text-decoration: none;
     color: black;
@@ -187,7 +187,7 @@ const FoodHeaders = () => {
       <Nav>
         <Logo>
           <Link to="/" end>
-            Food<span>Mood</span>
+            Savory<span>Secrets</span>
           </Link>
         </Logo>
         <List>
