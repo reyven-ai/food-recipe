@@ -1,173 +1,37 @@
 import { Link } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import styled from "styled-components";
 
-const HeroContainer = styled.div`
-  color: white;
-  gap: 100px;
-  display: flex;
-  width: 90%;
-  margin: auto;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 3rem;
-  margin-bottom: 5rem;
-
-  @media (max-width: 576px) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    margin-top: 1rem;
-    gap: 30px;
-  }
-`;
-
-const Content = styled.div`
-  width: 90%;
-
-  @media (max-width: 576px) {
-    width: 100%;
-  }
-`;
-
-const Contents = styled.div`
-  color: black;
-  width: 550px;
-  text-align: left;
-
-  @media (max-width: 576px) {
-    width: 100%;
-    text-align: center;
-  }
-`;
-
-const HeroH1 = styled.h1`
-  font-weight: 700;
-  margin-bottom: 0;
-  margin: auto;
-  line-height: 40px;
-
-  @media (max-width: 576px) {
-    font-size: 25px;
-    width: 100%;
-    line-height: 35px;
-  }
-`;
-
-// const Heroh2 = styled.h2`
-//   text-align: center;
-//   padding: 0;
-//   color: black;
-//   font-size: 26px;
-
-//   @media (max-width: 576px) {
-//     font-size: 8px;
-//   }
-// `;
-
-const HeroP = styled.p`
-  font-weight: 500;
-  width: 480px;
-
-  @media (max-width: 576px) {
-    width: 100%;
-  }
-`;
-
-const Links = styled.div`
-  padding-top: 1rem;
-  text-align: left;
-
-  @media (max-width: 576px) {
-    text-align: center;
-  }
-`;
-
-const StyledLink = styled(Link)`
-  border: 1px solid #00b14f;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 700;
-  color: black;
-  padding: 0.5rem 1.5rem;
-  border-radius: 24px;
-
-  @media (max-width: 576px) {
-    padding: 0.4rem 1.5rem;
-    font-size: 14px;
-    border-radius: 22px;
-  }
-
-  &:hover {
-    /* Add hover styles here */
-  }
-`;
-
-const Div = styled.div`
-  h2 {
-    text-align: center;
-    padding: 0;
-    color: black;
-    font-size: 26px;
-
-    @media (max-width: 576px) {
-      font-size: 18px;
-      display: none;
-    }
-  }
-`;
-
-const CarouselContainer = styled(Carousel)`
-  background-color: rgba(0, 0, 0, 0.99);
-  border-radius: 15px;
-
-  @media (max-width: 576px) {
-    /* display: none; */
-  }
-`;
-
-const CarouselImg = styled.img`
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  opacity: 0.7;
-  border-radius: 15px;
-
-  @media (max-width: 576px) {
-    height: auto;
-    /* display: none; */
-  }
-`;
-
-const Span = styled.span`
-  color: #00b14f;
-`;
-
-function Hero() {
+const Hero = () => {
   return (
-    <HeroContainer>
-      <Content>
-        <Contents>
-          <HeroH1>
+    <div className="text-white gap-[100px] flex w-[90%] mx-auto justify-between items-center mt-[3rem] mb-5">
+      <div className="w-[90%]">
+        <div className="text-black w-[550px] 2xl:text-left sm:text-center">
+          <h1 className="font-bold mb-0 md:mb-0 2xl:leading-[37px] 2xl:text-[32px]">
             Unlock the Art of Cooking with Our Handpicked Selection of Popular
             and Exquisite Recipes from Every Corner of the Globe
-          </HeroH1>
-          <HeroP>
+          </h1>
+          <p className="font-medium w-[480px] md:w-full my-[1rem]">
             Discover Delicious Recipes from Around the World and Master Your
             Culinary Skills Today!
-          </HeroP>
-        </Contents>
-        <Links>
-          <StyledLink to="/discover">Discover</StyledLink>
-        </Links>
-      </Content>
-      <Div>
-        <h2>
-          Popular Meals in the <Span>Philippines</Span>
+          </p>
+        </div>
+        <div className="pt-[1rem] md:text-center 2xl:text-left">
+          <Link
+            to="/discover"
+            className="border border-green-500 text-black text-md font-semibold px-4 py-2 rounded-[24px] hover:bg-green-500  "
+          >
+            Discover
+          </Link>
+        </div>
+      </div>
+
+      <div className="hidden md:block">
+        <h2 className="text-center text-black text-xl">
+          Popular Meals in the{" "}
+          <span className="text-green-500">Philippines</span>
         </h2>
-        <CarouselContainer
+        <Carousel
           showThumbs={false}
           infiniteLoop={true}
           autoPlay={true}
@@ -176,33 +40,37 @@ function Hero() {
           interval={2000}
         >
           <div>
-            <CarouselImg
+            <img
               src="https://food.grab.com/static/page-home/PH-new-1.jpg"
               alt="1"
+              className="w-full h-[500px] object-cover opacity-70 rounded-lg"
             />
           </div>
           <div>
-            <CarouselImg
+            <img
               src="https://food.grab.com/static/page-home/PH-new-3.jpg"
               alt="2"
+              className="w-full h-[500px] object-cover opacity-70 rounded-lg"
             />
           </div>
           <div>
-            <CarouselImg
+            <img
               src="https://food.grab.com/static/page-home/PH-new-2.jpg"
               alt="3"
+              className="w-full h-[500px] object-cover opacity-70 rounded-lg"
             />
           </div>
           <div>
-            <CarouselImg
+            <img
               src="https://food.grab.com/static/page-home/PH-new-4.jpg"
               alt="4"
+              className="w-full h-[500px] object-cover opacity-70 rounded-lg"
             />
           </div>
-        </CarouselContainer>
-      </Div>
-    </HeroContainer>
+        </Carousel>
+      </div>
+    </div>
   );
-}
+};
 
 export default Hero;
