@@ -1,55 +1,9 @@
 import React, { useEffect } from "react";
 import MealsByArea from "../components/Browse/Area";
-import styled from "styled-components";
 import { useLocalStorage } from "../useHooks/useLocalStorage";
 
-const StyledSelect = styled.select`
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 200px;
-
-  @media (max-width: 576px) {
-    width: 100%;
-    height: 40px;
-    font-size: 14px;
-  }
-`;
-
-const Heading = styled.h1`
-  @media (max-width: 576px) {
-    font-size: 20px;
-    margin-bottom: 25px;
-    width: 100%;
-  }
-`;
-
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 2rem;
-
-  @media (max-width: 576px) {
-    width: 100%;
-    flex-direction: column;
-    margin-top: 1rem;
-  }
-`;
-
-const OptionsContainer = styled.div`
-  display: flex;
-  // flex-direction: column;
-  gap: 30px;
-  align-items: flex-start;
-
-  @media (max-width: 576px) {
-  }
-`;
-
-function BrowseByArea() {
-  const [selectedArea, setSelectedArea] = useLocalStorage("selectedArea", ""); // Initialize with an empty string
+const BrowseByArea = () => {
+  const [selectedArea, setSelectedArea] = useLocalStorage("selectedArea", "");
   const [selectedLetter, setSelectedLetter] = useLocalStorage(
     "selectedLetter",
     ""
@@ -64,21 +18,25 @@ function BrowseByArea() {
   };
 
   useEffect(() => {
-    setSelectedArea(selectedArea); // Update localStorage for selectedArea
-  }, [selectedArea]);
+    setSelectedArea(selectedArea);
+  }, [selectedArea, setSelectedArea]);
 
   useEffect(() => {
-    setSelectedLetter(selectedLetter); // Update localStorage for selectedLetter
-  }, [selectedLetter]);
+    setSelectedLetter(selectedLetter);
+  }, [selectedLetter, setSelectedLetter]);
 
   return (
-    <div>
-      <FlexContainer>
-        <Heading>
-          Browse By <span>Country</span>
-        </Heading>
-        <OptionsContainer>
-          <StyledSelect value={selectedArea} onChange={handleAreaChange}>
+    <div className="mt-8 md:mt-8">
+      <h1 className="text-2xl md:text-3xl text-left mx-[7%] w-[100%] m-[auto]">
+        Browse By <span>Country</span>
+      </h1>
+      <div className="flex flex-col md:flex-row md:items-center justify-end mb-8 md:mb-0 w-[80%] mx-[auto] mt-[5rem]">
+        <div className="flex gap-4 md:gap-8">
+          <select
+            value={selectedArea}
+            onChange={handleAreaChange}
+            className="p-3 md:p-3 border border-gray-300 rounded-md w-[200px]"
+          >
             <option value="">Select an area</option>
             <option value="Japanese">Japan</option>
             <option value="Canadian">Canada</option>
@@ -88,7 +46,7 @@ function BrowseByArea() {
             <option value="Jamaican">Jamaica</option>
             <option value="Chinese">China</option>
             <option value="Dutch">Netherlands</option>
-            <option value="Egyptian">Egypt</option>
+            <option value="Egyptian">Egypt</option>{" "}
             <option value="Greek">Greece</option>
             <option value="Indian">India</option>
             <option value="Irish">Iran</option>
@@ -109,20 +67,23 @@ function BrowseByArea() {
             <option value="Tunisian">Tunisia</option>
             <option value="Polish">Poland</option>
             <option value="Filipino">Philippines</option>
-          </StyledSelect>
+          </select>
 
-          <StyledSelect value={selectedLetter} onChange={handleLetterChange}>
+          <select
+            value={selectedLetter}
+            onChange={handleLetterChange}
+            className="p-2 md:p-3 border border-gray-300 rounded-md w-[200px]"
+          >
             <option value="">Sort by Letter</option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
-            {/* Add more options for sorting letters as needed */}
-          </StyledSelect>
-        </OptionsContainer>
-      </FlexContainer>
+          </select>
+        </div>
+      </div>
 
       {selectedArea && <MealsByArea selectedArea={selectedArea} />}
     </div>
   );
-}
+};
 
 export default BrowseByArea;
