@@ -1,241 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
-import MenuButton from "../MenuButton/MenuButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
-const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  padding: 1% 10%;
-  align-items: center;
-  height: 5rem;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 576px) {
-    padding: 1% 4%;
-  }
-`;
-
-const Nav = styled.nav`
-  display: flex;
-
-  // Add other styles here
-`;
-
-const List = styled.ul`
-  display: flex;
-  gap: 1rem;
-  font-weight: 600;
-  font-size: 16px;
-  margin-left: 3rem;
-
-  @media (max-width: 820px) {
-    display: ${({ isMenuOpen }) => (isMenuOpen ? "flex" : "none")};
-    gap: 1rem;
-    font-weight: 600;
-    font-size: 16px;
-    margin-left: 3rem;
-  }
-`;
-
-const Logo = styled.div`
-  a {
-    font-size: 25px;
-    font-weight: 700;
-    text-decoration: none;
-    color: black;
-  }
-  @media (max-width: 576px) {
-    font-size: 20px;
-    /* height: auto; */
-  }
-`;
-
-const Handle = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-  padding: 0;
-  justify-content: around-between;
-  gap: 5px;
-`;
-
-const StyledNavLink = styled(NavLink)`
-  text-decoration: none;
-  color: black;
-  font-weight: 700;
-  // Your default styles here
-
-  &:hover {
-    // Styles for hover
-  }
-
-  &.active {
-    color: #00b14f;
-    font-weight: 600;
-  }
-`;
-
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-
-  @media (max-width: 700px) {
-    /* Show the menu button when screen width is 700px or less */
-    // display: none;
-  }
-`;
-
-const SearchButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem 0.4rem 0.4rem 0.6rem;
-  position: relative;
-  left: 40px;
-  @media (max-width: 700px) {
-    /* left: 0; */
-  }
-`;
-
-const Input = styled.input`
-  height: 45px;
-  width: 350px;
-  border: 1px solid #ccc;
-  background-color: white;
-  padding: 0.5rem 2.7rem;
-  transition: width 0.3s ease-in-out;
-  color: black;
-  font-size: 16px;
-  border-radius: 20px;
-  // Add other styles here
-
-  @media (max-width: 820px) {
-    width: 82%;
-    height: 35px;
-    border-radius: 18px;
-    font-size: 13px;
-    padding-right: 1.5rem;
-    /* display: none; */
-  }
-  &:focus {
-    /* width: 350px; */
-    outline: #00b14f;
-    border: 1px solid #00b14f;
-    box-shadow: 0 1px 5px #00b14f;
-  }
-  @media (max-width: 576px) {
-    width: 82%;
-    height: 32px;
-  }
-`;
+import { NavLink, Link, useLocation } from "react-router-dom";
+import Search from "../SearchInput/Search";
 
 const FoodHeaders = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
-  const { query } = useParams();
-  // const [searchHistory, setSearchHistory] = useState([]);
-  // const [showSearchHistory, setShowSearchHistory] = useState(false);
+  const location = useLocation();
 
-  useEffect(() => {
-    if (query) {
-      setSearchTerm(decodeURIComponent(query));
-    }
-  }, [query]);
-
-  // useEffect(() => {
-  //   const storedHistory = localStorage.getItem("searchHistory");
-  //   if (storedHistory) {
-  //     setSearchHistory(JSON.parse(storedHistory));
-  //   }
-  // }, []);
-
-  // Function to handle search and update search history
-  const handleSearch = async (e) => {
-    e.preventDefault();
-
-    if (searchTerm.trim() === "") {
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`
-      );
-      const data = await response.json();
-
-      navigate(`/search/${encodeURIComponent(searchTerm)}`);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  // const handleRemoveItem = (index) => {
-  //   const updatedHistory = [...searchHistory];
-  //   updatedHistory.splice(index, 1);
-  //   setSearchHistory(updatedHistory);
-  //   localStorage.setItem("searchHistory", JSON.stringify(updatedHistory));
-  // };
+  const navLinks = [
+    { path: "/", name: "Home" },
+    { path: "/cuisine", name: "Our Cuisine" },
+    { path: "/favorites", name: "Your Favorites" },
+    { path: "/area", name: "Browse by Country" },
+  ];
 
   return (
-    <HeaderContainer>
-      <Nav>
-        <Logo>
-          <Link to="/" end>
-            Savory<span>Secrets</span>
-          </Link>
-        </Logo>
-        <List>
-          <li>
-            <StyledNavLink to="/" end>
-              Home
-            </StyledNavLink>
-          </li>
-          <li>
-            <StyledNavLink to="/cuisine">Cuisine</StyledNavLink>
-          </li>
-          <li>
-            <StyledNavLink to="/favorites">Favorites</StyledNavLink>
-          </li>
-          <li>
-            <StyledNavLink to="/area">Browse by Country</StyledNavLink>
-          </li>
-        </List>
-      </Nav>
-      <Handle>
-        <Form onSubmit={handleSearch}>
-          <SearchButton onClick={handleSearch} type="submit">
-            <FontAwesomeIcon
-              icon={faSearch}
-              style={{
-                fontSize: "18px",
-                color: "black",
-              }}
-            />
-            {/* <SearchImage src={Search} alt="Search" /> */}
-          </SearchButton>
-          <Input
-            type="text"
-            placeholder="Enter meal name"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            // onFocus={() => setShowSearchHistory(true)}
-            // onBlur={() => setShowSearchHistory(false)}
-          />
-          {/* <SearchHistory
-            show={showSearchHistory}
-            searchHistory={searchHistory}
-            onRemoveItem={handleRemoveItem}
-          /> */}
-        </Form>
-        <MenuButton />
-      </Handle>
-    </HeaderContainer>
+    <header className="flex bg-white justify-between items-center lg:px-[1%] xl:px-[5%] 2xl:px-[10%] py-[0.7rem] shadow-md">
+      <div className="mr-3">
+        <Link to="/" className="text-black font-bold text-[22px]">
+          Savory<span className="text-green-500">Secrets</span>
+        </Link>
+      </div>
+      <div>
+        <ul className="flex gap-10 font-semibold text-base md:ml-12">
+          {navLinks.map(({ path, name }, index) => (
+            <li key={index} className="text-black font-medium">
+              <NavLink
+                to={path}
+                end
+                className={`hover:text-green-500 ${
+                  location.pathname === path ? "text-green-500" : ""
+                }`}
+              >
+                {name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <Search />
+      </div>
+    </header>
   );
 };
 
