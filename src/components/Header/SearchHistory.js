@@ -33,7 +33,7 @@ const List = styled.ul`
 
 const HistoryHandler = styled.div`
   display: flex;
-  align-item: center;
+  align-items: center;
   gap: 15px;
 `;
 
@@ -42,7 +42,7 @@ const Item = styled.li`
   padding: 0.2rem 0rem;
   display: flex;
   justify-content: space-between;
-  align-item: center;
+  align-items: center;
 
   @media (max-width: 576px) {
     font-size: 14px;

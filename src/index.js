@@ -29,10 +29,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { createStore, applyMiddleware } from "redux"; // Import applyMiddleware
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk"; // Import thunk middleware
-import App from "./App"; // Your main application component
+import thunk from "redux-thunk";
+import App from "./App";
 import "./index.css";
 import rootReducer from "./store/reducers/meal";
 
@@ -57,4 +57,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
- 

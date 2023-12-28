@@ -9,7 +9,6 @@ import {
   faHeart,
   faBowlFood,
   faGlobe,
-  faGreaterThan,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavContainer = styled.div`
