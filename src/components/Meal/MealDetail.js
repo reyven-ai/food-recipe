@@ -1,72 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchMealById } from "../../api/apis";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
-
-const DetailContainer = styled.div`
-  display: block;
-  padding: 0.2rem 1.5rem;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 5rem;
-`;
-
-const ImageStyled = styled.img`
-  max-width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  object-fit: cover;
-  height: auto;
-`;
-
-const ButtonStyled = styled.button`
-  background-color: transparent;
-  border: 1px solid #00b14f;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  width: 100%; /* Set button width to 100% */
-  margin-top: 0.5rem;
-  color: black;
-
-  ${(props) =>
-    props.active &&
-    `
-      background-color: #00b14f;
-      color: #fff;
-    `}
-`;
-
-const ListStyled = styled.ul`
-  margin-top: 1rem;
-`;
-
-const Content = styled.p`
-  width: 100%;
-`;
-
-const MoreContainer = styled.div`
-  text-align: left;
-  width: 100%;
-  height: 100%;
-  padding: 0 1rem;
-  box-sizing: border-box;
-  overflow-y: auto;
-`;
-
-const HeadingStyled = styled.h2`
-  text-align: center;
-  font-size: 18px;
-`;
-
-const CloseContainer = styled.div`
-  text-align: left;
-  padding-top: 10px;
-`;
+import Close from "../../assests/close.png";
 
 function MealDetailPage() {
   const { idMeal } = useParams();
@@ -101,65 +36,80 @@ function MealDetailPage() {
   }
 
   return (
-    <DetailContainer>
-      <CloseContainer>
-        <Link to="/cuisine">
-          <FontAwesomeIcon
-            icon={faClose}
-            style={{
-              fontSize: "18px",
-              color: "black",
-            }}
-          />
-        </Link>
-      </CloseContainer>
-      <div>
-        <HeadingStyled>{mealDetail.strMeal}</HeadingStyled>
-        <ImageStyled src={mealDetail.strMealThumb} alt={mealDetail.strMeal} />
+    <>
+      <div className="block p-2 md:p-8 gap-30 justify-center items-center pb-20">
+        <h2 className="text-center text-2xl md:text-3xl font-medium mb-[0.5rem]">
+          {mealDetail.strMeal}
+        </h2>
+        <div>
+          <div className="w-[35%] h-auto rounded-md shadow-md m-[auto]">
+            <div className="text-left pt-0 absolute m-3">
+              <Link to="/cuisine">
+                <img className="w-[35px] h-[35px]" src={Close} alt=""></img>
+              </Link>
+            </div>
+            <img
+              className="rounded-md"
+              src={mealDetail.strMealThumb}
+              alt={mealDetail.strMeal}
+            />
+          </div>
+        </div>
+        <div className="text-center p-2 w-[35%] m-[auto] mt-[0.5rem]">
+          <div>
+            <button
+              onClick={() => handleTabChange("Country")}
+              className={`border border-green-500 w-[70%]  px-4 py-2 rounded-[24px] font-semibold ${
+                activeTab === "Country"
+                  ? "bg-green-500 text-white"
+                  : "text-black"
+              }`}
+            >
+              Area
+            </button>
+            {activeTab === "Country" && <p>{mealDetail.strArea}</p>}
+          </div>
+          <div className="mt-2">
+            <button
+              onClick={() => handleTabChange("Ingredients")}
+              className={`border border-green-500 px-4 w-[70%] py-2 rounded-[24px] font-semibold ${
+                activeTab === "Ingredients"
+                  ? "bg-green-500 text-white"
+                  : "text-black"
+              }`}
+            >
+              Ingredients
+            </button>
+            {activeTab === "Ingredients" && (
+              <ul className="list-disc pl-6 mt-2">
+                {Object.keys(mealDetail)
+                  .filter(
+                    (key) => key.startsWith("strIngredient") && mealDetail[key]
+                  )
+                  .map((key) => (
+                    <li key={key}>{mealDetail[key]}</li>
+                  ))}
+              </ul>
+            )}
+          </div>
+          <div className="mt-2">
+            <button
+              onClick={() => handleTabChange("Instructions")}
+              className={`border border-green-500 px-4 py-2 w-[70%] rounded-[24px] font-semibold ${
+                activeTab === "Instructions"
+                  ? "bg-green-500 text-white"
+                  : "text-black"
+              }`}
+            >
+              Instructions
+            </button>
+            {activeTab === "Instructions" && (
+              <p className="mt-2">{mealDetail.strInstructions}</p>
+            )}
+          </div>
+        </div>
       </div>
-      <MoreContainer>
-        <div>
-          <ButtonStyled
-            onClick={() => handleTabChange("Country")}
-            active={activeTab === "Country" ? "activeTab" : ""}
-          >
-            Area
-          </ButtonStyled>
-          {activeTab === "Country" && <p>{mealDetail.strArea}</p>}
-        </div>
-        <div>
-          <ButtonStyled
-            onClick={() => handleTabChange("Ingredients")}
-            active={activeTab === "Ingredients" ? "activeTab" : ""}
-          >
-            Ingredients
-          </ButtonStyled>
-          {activeTab === "Ingredients" && (
-            <ListStyled>
-              {Object.keys(mealDetail)
-                .filter(
-                  (key) => key.startsWith("strIngredient") && mealDetail[key]
-                )
-                .map((key) => (
-                  <li key={key}>{mealDetail[key]}</li>
-                ))}
-            </ListStyled>
-          )}
-        </div>
-        <div>
-          <ButtonStyled
-            onClick={() => handleTabChange("Instructions")}
-            active={activeTab === "Instructions" ? "activeTab" : ""}
-          >
-            Instructions
-          </ButtonStyled>
-          {activeTab === "Instructions" && (
-            <Content>{mealDetail.strInstructions}</Content>
-          )}
-        </div>
-        {/* </ButtonContainer> */}
-      </MoreContainer>
-    </DetailContainer>
+    </>
   );
 }
 

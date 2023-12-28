@@ -35,7 +35,6 @@ const router = createBrowserRouter(routes);
 function App() {
   const dispatch = useDispatch();
 
-  // Initialize favorites from localStorage when the app loads
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (storedFavorites.length > 0) {

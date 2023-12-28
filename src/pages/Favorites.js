@@ -1,57 +1,5 @@
 import { useSelector } from "react-redux";
-
 import FavoriteItem from "../components/Favorites/FavoriteItem";
-
-import styled from "styled-components";
-
-const FavoritesList = styled.ul`
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(5, 1fr);
-  width: 100%;
-  margin: auto;
-  justify-content: center;
-  padding: 1rem 2rem;
-  align-items: center;
-
-  @media (max-width: 576px) {
-    grid-template-columns: repeat(2, 1fr);
-    width: 100%;
-    margin: 0.5rem auto;
-    padding: 0.5rem 1rem;
-  }
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* Four columns for screens wider than 992px (small desktops) */
-  }
-
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(
-      4,
-      1fr
-    ); /* Four columns for screens wider than 992px (small desktops) */
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(
-      5,
-      1fr
-    ); /* Five columns for screens wider than 1200px (large desktops) */
-  }
-`;
-
-const FavoritesHeading = styled.h2`
-  text-align: left;
-  padding-left: 2rem;
-  font-size: 26px;
-
-  @media (max-width: 576px) {
-    font-size: 18px;
-    padding-left: 1.5rem;
-  }
-`;
 
 const Favorites = (props) => {
   const favoriteMeals = useSelector((state) => state.favorites);
@@ -61,19 +9,21 @@ const Favorites = (props) => {
   if (favoriteMeals.length > 0) {
     content = (
       <>
-        <FavoritesHeading>
-          My <span>Favorites</span>
-        </FavoritesHeading>
-        <FavoritesList>
-          {favoriteMeals.map((mea) => (
+        <div className="text-left pl-8 mt-8">
+          <h2 className="text-2xl md:text-3xl text-left">
+            Your <span>Favorites</span>
+          </h2>
+        </div>
+        <ul className="grid gap-[20px] grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full mx-auto justify-center p-4 md:p-8 items-center">
+          {favoriteMeals.map((meal) => (
             <FavoriteItem
-              key={mea.idMeal}
-              idMeal={mea.idMeal}
-              strMeal={mea.strMeal}
-              strMealThumb={mea.strMealThumb}
+              key={meal.idMeal}
+              idMeal={meal.idMeal}
+              strMeal={meal.strMeal}
+              strMealThumb={meal.strMealThumb}
             />
           ))}
-        </FavoritesList>
+        </ul>
       </>
     );
   }

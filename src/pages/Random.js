@@ -1,75 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { fetchRandomMeal } from "../api/apis";
-import styled from "styled-components"; // Import styled from 'styled-components'
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
-
-// Create styled components for your elements
-const StyledContainer = styled.div`
-  text-align: center;
-  margin: 12px 20px;
-  padding-bottom: 4rem;
-`;
-
-const CloseContainer = styled.div`
-  text-align: left;
-  padding-top: 0px;
-`;
-
-const StyledHeading = styled.h1`
-  font-size: 24px;
-  color: #333;
-
-  @media (max-width: 576px) {
-    font-size: 18px;
-  }
-`;
-
-const StyledImage = styled.img`
-  max-width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  margin-top: 10px;
-  object-fit: cover;
-  height: auto;
-`;
-
-const StyledMealName = styled.h2`
-  font-size: 18px;
-  color: black;
-
-  @media (max-width: 576px) {
-    font-size: 14px;
-  }
-`;
-
-const ButtonStyled = styled.button`
-  background-color: transparent;
-  border: 1px solid #00b14f;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  width: 100%; /* Set button width to 100% */
-  margin-top: 0.5rem;
-  color: black;
-
-  ${(props) =>
-    props.active &&
-    `
-      background-color: #00b14f;
-      color: #fff;
-    `}
-`;
-
-const ListStyled = styled.ul`
-  margin-top: 1rem;
-`;
-
-const Content = styled.p`
-  width: 100%;
-`;
+import Close from "../assests/close.png";
 
 function RandomMeal() {
   const [activeTab, setActiveTab] = useState("");
@@ -83,78 +16,87 @@ function RandomMeal() {
     setActiveTab(tabName);
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   return (
-    <StyledContainer>
-      <CloseContainer>
-        <Link to="/">
-          <FontAwesomeIcon
-            icon={faClose}
-            style={{
-              fontSize: "18px",
-              color: "black",
-            }}
-          />
-        </Link>
-      </CloseContainer>
-      <StyledHeading>
-        Here's the <span>random</span> meal for you!
-      </StyledHeading>
+    <div className="text-center m-4 md:m-8 pb-16">
+      <h2 className="text-2xl md:text-3xl text-left">
+        Here's the <span className="text-green-500">random</span> meal for you!
+      </h2>
       {randomMeal ? (
         <div>
-          <StyledImage src={randomMeal.strMealThumb} alt={randomMeal.strMeal} />
-          <StyledMealName>{randomMeal.strMeal}</StyledMealName>
-          <div>
-            <ButtonStyled
-              onClick={() => handleTabChange("Country")}
-              active={activeTab === "Country" ? "activeTab" : ""}
-            >
-              Area
-            </ButtonStyled>
-            {activeTab === "Country" && <p>{randomMeal.strArea}</p>}
+          <h2 className="text-center text-2xl md:text-3xl font-medium mb-[0.5rem]">
+            {randomMeal.strMeal}
+          </h2>
+          <div className="w-[35%] h-auto  shadow-md m-[auto]">
+            <div className="text-left pt-0 absolute m-3">
+              <Link to="/">
+                <img className="w-[35px] h-[35px]" src={Close} alt=""></img>
+              </Link>
+            </div>
+            <img
+              className="rounded-md"
+              src={randomMeal.strMealThumb}
+              alt={randomMeal.strMeal}
+            />
           </div>
-          <div>
-            <ButtonStyled
-              onClick={() => handleTabChange("Ingredients")}
-              active={activeTab === "Ingredients" ? "activeTab" : ""}
-            >
-              Ingredients
-            </ButtonStyled>
-            {activeTab === "Ingredients" && (
-              <ListStyled>
-                {Object.keys(randomMeal)
-                  .filter(
-                    (key) => key.startsWith("strIngredient") && randomMeal[key]
-                  )
-                  .map((key) => (
-                    <li key={key}>{randomMeal[key]}</li>
-                  ))}
-              </ListStyled>
-            )}
-          </div>
-          <div>
-            <ButtonStyled
-              onClick={() => handleTabChange("Instructions")}
-              active={activeTab === "Instructions" ? "activeTab" : ""}
-            >
-              Instructions
-            </ButtonStyled>
-            {activeTab === "Instructions" && (
-              <Content>{randomMeal.strInstructions}</Content>
-            )}
+          <div className="text-center p-2 w-[35%] m-[auto] mt-[0.5rem] gap-x-[10px]">
+            <div>
+              <button
+                onClick={() => handleTabChange("Country")}
+                className={`border border-green-500 w-[70%]  px-4 py-2 rounded-[24px] font-semibold ${
+                  activeTab === "Country"
+                    ? "bg-green-500 text-white"
+                    : "text-black"
+                }`}
+              >
+                Area
+              </button>
+              {activeTab === "Country" && <p>{randomMeal.strArea}</p>}
+            </div>
+            <div className="pt-2">
+              <button
+                onClick={() => handleTabChange("Ingredients")}
+                className={`border border-green-500 w-[70%]  px-4 py-2 rounded-[24px] font-semibold ${
+                  activeTab === "Country"
+                    ? "bg-green-500 text-white"
+                    : "text-black"
+                }`}
+              >
+                Ingredients
+              </button>
+              {activeTab === "Ingredients" && (
+                <ul className="mt-2">
+                  {Object.keys(randomMeal)
+                    .filter(
+                      (key) =>
+                        key.startsWith("strIngredient") && randomMeal[key]
+                    )
+                    .map((key) => (
+                      <li key={key}>{randomMeal[key]}</li>
+                    ))}
+                </ul>
+              )}
+            </div>
+            <div className="pt-2">
+              <button
+                onClick={() => handleTabChange("Instructions")}
+                className={`border border-green-500 w-[70%]  px-4 py-2 rounded-[24px] font-semibold ${
+                  activeTab === "Country"
+                    ? "bg-green-500 text-white"
+                    : "text-black"
+                }`}
+              >
+                Instructions
+              </button>
+              {activeTab === "Instructions" && (
+                <p className="w-full mt-2">{randomMeal.strInstructions}</p>
+              )}
+            </div>
           </div>
         </div>
       ) : (
         <p>No random meal available</p>
       )}
-    </StyledContainer>
+    </div>
   );
 }
 

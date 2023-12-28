@@ -1,51 +1,13 @@
 import React from "react";
 import MealItem from "./MealItem";
-import styled from "styled-components";
-
-const MealContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  width: 80%;
-  margin: 1rem auto;
-  gap: 15px;
-  justify-content: center;
-
-  @media (max-width: 576px) {
-    grid-template-columns: repeat(2, 1fr);
-    width: 90%;
-    margin: 0.5rem auto;
-    padding-bottom: 4rem;
-  }
-
-  @media (min-width: 600px) {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* Three columns for screens wider than 768px (tablets) */
-  }
-
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(
-      4,
-      1fr
-    ); /* Four columns for screens wider than 992px (small desktops) */
-  }
-
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(
-      5,
-      1fr
-    ); /* Five columns for screens wider than 1200px (large desktops) */
-  }
-`;
 
 function MealList({ meals }) {
   return (
-    <MealContainer>
+    <div className="grid grid-cols-5 gap-[15px] mt-[1rem] mx-auto justify-center xs:grid-cols-2 xs:w-[90%]  sm:grid-cols-3 sm:w-90 sm:margin-0.5rem sm:pb-4 md:grid-cols-3 lg:w-[90%] lg:grid-cols-4 xl:grid-cols-5 xl:w-[90%] 2xl:grid-cols-5 2xl:w-[80%]">
       {meals.map((meal) => (
         <MealItem key={meal.idMeal} meal={meal} />
       ))}
-    </MealContainer>
+    </div>
   );
 }
 

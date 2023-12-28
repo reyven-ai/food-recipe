@@ -5,96 +5,6 @@ import { fetchMealsByCategory } from "../api/apis";
 import MealList from "../components/Meal/MealList";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-
-const Heading = styled.h2`
-  font-weight: 700;
-  font-size: 34px;
-
-  @media (max-width: 576px) {
-    font-size: 25px;
-    margin-bottom: 15px;
-    width: 100%;
-  }
-`;
-
-const CousineContainer = styled.div`
-  margin-top: 3rem;
-
-  @media screen and (max-width: 768px) {
-    margin-top: 1rem;
-  }
-`;
-
-const Description = styled.p`
-  width: 500px;
-  margin: auto;
-  font-weight: 500;
-
-  @media (max-width: 576px) {
-    width: 100%;
-    font-size: 15px;
-    padding: 0 0.5rem;
-  }
-`;
-
-const CategoryList = styled.ul`
-  display: flex;
-  gap: 20px;
-  padding-top: 2.4rem;
-  width: 59%;
-  overflow: scroll;
-  height: 100px;
-  margin: auto;
-  list-style: none;
-  // box-shadow: 0 1px 5px #00b14f;
-
-  // padding: 0;
-
-  @media (max-width: 576px) {
-    width: 80%; /* Make the category list full-width on smaller screens */
-    padding-top: 1.2rem;
-    height: 70px;
-    gap: 13px;
-  }
-`;
-
-const CategoryItem = styled.li`
-  a {
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    margin: 0;
-    color: black;
-    font-weight: 600;
-    border: 1px solid #00b14f;
-    border-radius: 24px;
-    font-size: 15px;
-    text-decoration: none;
-
-    @media (max-width: 576px) {
-      padding: 0.3rem 0.8rem;
-      font-size: 13px;
-      border-radius: 18px;
-    }
-  }
-  &.active {
-    a {
-      background-color: #00b14f;
-      border: 1px solid #00b14f;
-      border-radius: 24px;
-      padding: 0.5rem 1rem;
-      color: white;
-      font-size: 15px;
-      font-weight: 600;
-
-      @media (max-width: 576px) {
-        padding: 0.3rem 0.7rem;
-        font-size: 13px;
-        border-radius: 18px;
-      }
-    }
-  }
-`;
 
 function Category() {
   const {
@@ -137,34 +47,34 @@ function Category() {
   }
 
   return (
-    <CousineContainer>
-      <Heading>
+    <div className="mt-8 md:mt-6">
+      <h2 className="font-bold text-1xl md:text-2xl lg:text-3xl xl:text-4xl mb-2">
         Discover Delicious <span>Cuisine</span>
-      </Heading>
-      <Description>
+      </h2>
+      <p className="mx-auto font-medium max-w-screen-sm md:max-w-screen-md w-[550px]">
         Discover a world of flavors with our wide range of meal categories.
         Click on a category to explore mouthwatering dishes.
-      </Description>
-      <CategoryList>
+      </p>
+      <ul className="flex gap-5 pt-4 pb-6 md:pt-6 w-11/12 md:w-[59%] overflow-x-auto mx-auto">
         {categories.map((category) => (
-          <CategoryItem
+          <li
             key={category.strCategory}
-            className={
+            className={`text-black font-semibold border border-green-500 rounded-[24px] py-1.5 px-5 text-[15px] ${
               selectedCategory &&
               category.strCategory.toLowerCase() === selectedCategory
-                ? "active"
+                ? "bg-green-500 border-green-500 text-white"
                 : ""
-            }
+            }`}
           >
             <Link to={`/cuisine/${category.strCategory.toLowerCase()}`}>
               {category.strCategory}
             </Link>
-          </CategoryItem>
+          </li>
         ))}
-      </CategoryList>
+      </ul>
 
       {meals && <MealList meals={meals} />}
-    </CousineContainer>
+    </div>
   );
 }
 
